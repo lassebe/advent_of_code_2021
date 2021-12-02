@@ -1,3 +1,6 @@
 fun main() {
-    println(depth())
+    val (x, y) = pilot()
+    println(x)
+    println(y)
+    println(x*y)
 }
