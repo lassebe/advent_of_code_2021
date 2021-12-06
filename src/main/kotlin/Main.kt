@@ -1,3 +1,3 @@
 fun main() {
-    println(playBingo())
+    println(avoidPipes())
 }
