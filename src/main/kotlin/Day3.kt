@@ -18,7 +18,7 @@ fun majority(
         majority(filtered, comparison, index + 1)
 }
 
-fun readInput(): List<String> {
+fun readPowerInput(): List<String> {
     val report = mutableListOf<String>()
     while (true) {
         val line = readLine() ?: break
@@ -28,14 +28,14 @@ fun readInput(): List<String> {
 }
 
 fun lifeSupportRating(): Int {
-    val report = readInput()
+    val report = readPowerInput()
     val oxygen = binaryStringArrayToInt(majority(report))
     val co2 = binaryStringArrayToInt(majority(report, { a: Char, b: Char -> a != b }))
     return oxygen * co2
 }
 
 fun power(): Int {
-    val report = readInput()
+    val report = readPowerInput()
 
     val bits = report[0].length
     val majority = report.size / 2
