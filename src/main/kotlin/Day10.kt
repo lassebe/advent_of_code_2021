@@ -1,4 +1,4 @@
-fun score(s: String): Int = when (s) {
+fun part1(s: String): Int = when (s) {
     ")" -> 3
     "]" -> 57
     "}" -> 1197
@@ -6,18 +6,19 @@ fun score(s: String): Int = when (s) {
     else -> 0
 }
 
-fun matchBrackets(): Int {
+fun matchBrackets(): Long {
     var line = readLine()
-    var score = 0
+    val scores = mutableListOf<Long>()
     while (line != null) {
-        score += isCorrupted(line)
+        val score = isCorrupted(line)
+        if(score != 0L) scores.add(score)
         line = readLine()
     }
-
-    return score
+    println(scores.sorted())
+    return scores.sorted()[scores.size/2]
 }
 
-private fun isCorrupted(line: String): Int {
+private fun isCorrupted(line: String): Long {
     val stack = mutableListOf<String>()
 
     line.chunked(1).forEach {
@@ -28,24 +29,33 @@ private fun isCorrupted(line: String): Int {
             "[" -> stack.add(it)
 
             "}" -> {
-                if (stack.last() != "{") return score(it)
+                if (stack.last() != "{") return 0
                 stack.removeLast()
             }
             ")" -> {
-                if (stack.last() != "(") return score(it)
+                if (stack.last() != "(") return 0
                 stack.removeLast()
             }
             ">" -> {
-                if (stack.last() != "<") return score(it)
+                if (stack.last() != "<") return 0
                 stack.removeLast()
             }
             "]" -> {
-                if (stack.last() != "[") return score(it)
+                if (stack.last() != "[") return 0
                 stack.removeLast()
             }
         }
     }
+    var score = 0L
+    while(stack.isNotEmpty()){
+        score *= 5
+        when(stack.removeLast()) {
+            "(" -> score += 1L
+            "[" -> score += 2L
+            "{" -> score += 3L
+            "<" -> score += 4L
+        }
+    }
 
-
-    return 0
+    return score
 }
