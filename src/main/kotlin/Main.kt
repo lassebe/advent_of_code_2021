@@ -1,3 +1,3 @@
 fun main() {
-    println(lavaHeights())
+    println(matchBrackets())
 }
