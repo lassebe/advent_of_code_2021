@@ -1,3 +1,3 @@
 fun main() {
-    println(polymer())
+    println(riskMaze())
 }
